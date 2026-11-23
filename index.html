@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JARVAS — Trợ Lý AI Thông Minh Thế Hệ Mới Cho Windows</title>
+  <style>
+    :root {
+      --bg: #040812;
+      --card: rgba(13, 22, 41, 0.78);
+      --border: rgba(0, 245, 212, 0.22);
+      --cyan: #00f5d4;
+      --sky: #38bdf8;
+      --amber: #fbbf24;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background:
+        radial-gradient(circle at 15% 12%, rgba(0, 245, 212, 0.14), transparent 38%),
+        radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.12), transparent 40%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(4, 8, 18, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 20px; font-weight: 900; letter-spacing: 2px; color: var(--cyan);
+      text-decoration: none;
+    }
+    .logo-dot {
+      width: 11px; height: 11px; border-radius: 50%;
+      background: var(--cyan); box-shadow: 0 0 14px var(--cyan);
+    }
+    .nav-links { display: flex; gap: 24px; align-items: center; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 600; transition: .2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .badge-beta {
+      padding: 5px 12px; border-radius: 999px; font-size: 12px; font-weight: 700;
+      background: rgba(251, 191, 36, 0.12); border: 1px solid rgba(251, 191, 36, 0.4); color: var(--amber);
+    }
+    .hero {
+      padding: 92px 0 68px; text-align: center;
+    }
+    .hero-tag {
+      display: inline-block; padding: 6px 14px; border-radius: 999px;
+      background: rgba(0, 245, 212, 0.1); border: 1px solid var(--border);
+      color: var(--cyan); font-size: 13px; font-weight: 700; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 62px); font-weight: 900; line-height: 1.12;
+      margin-bottom: 18px; letter-spacing: -0.5px;
+    }
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--cyan), var(--sky));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      max-width: 720px; margin: 0 auto 32px; font-size: 17px; color: var(--muted);
+    }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      padding: 13px 26px; border-radius: 12px; font-weight: 800; font-size: 15px;
+      text-decoration: none; transition: .2s; cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary {
+      background: var(--cyan); color: #041019; box-shadow: 0 0 26px rgba(0, 245, 212, 0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 34px rgba(0, 245, 212, 0.48); }
+    .btn-outline {
+      background: rgba(15, 28, 52, 0.8); color: var(--text); border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+    .section { padding: 64px 0; }
+    .sec-head { text-align: center; margin-bottom: 40px; }
+    .sec-head h2 { font-size: 30px; font-weight: 800; margin-bottom: 8px; }
+    .sec-head p { color: var(--muted); font-size: 15px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 18px; }
+    .card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 24px; backdrop-filter: blur(10px); transition: .2s;
+    }
+    .card:hover { border-color: var(--cyan); transform: translateY(-3px); }
+    .card-icon { font-size: 26px; margin-bottom: 12px; }
+    .card h3 { font-size: 17px; font-weight: 700; color: #f8fafc; margin-bottom: 8px; }
+    .card p { font-size: 14px; color: var(--muted); }
+    .security-box {
+      background: linear-gradient(135deg, rgba(11, 25, 48, 0.92), rgba(7, 17, 34, 0.95));
+      border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 20px;
+      padding: 34px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center;
+    }
+    @media (max-width: 820px) { .security-box { grid-template-columns: 1fr; } }
+    .sec-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .sec-list li {
+      background: rgba(5, 11, 22, 0.7); border: 1px solid rgba(148, 163, 184, 0.16);
+      padding: 12px 14px; border-radius: 10px; font-size: 14px;
+    }
+    .sec-list b { color: var(--cyan); }
+    .roadmap { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+    .rm-item {
+      background: var(--card); border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 14px; padding: 20px; position: relative;
+    }
+    .rm-item.active { border-color: var(--cyan); }
+    .rm-ver {
+      display: inline-block; font-size: 12px; font-weight: 800; padding: 3px 10px;
+      border-radius: 999px; background: rgba(0, 245, 212, 0.15); color: var(--cyan); margin-bottom: 10px;
+    }
+    .rm-item h4 { font-size: 16px; margin-bottom: 6px; }
+    .rm-item p { font-size: 13.5px; color: var(--muted); }
+    footer {
+      border-top: 1px solid var(--border); padding: 30px 0; text-align: center;
+      color: var(--muted); font-size: 13px; margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="logo" href="#"><span class="logo-dot"></span> JARVAS</a>
+      <div class="nav-links">
+        <a href="#features">Tính năng</a>
+        <a href="#security">Bảo mật</a>
+        <a href="#roadmap">Lộ trình</a>
+        <span class="badge-beta">🔒 Private Beta</span>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero container">
+    <div class="hero-tag">✨ Trợ Lý AI Thế Hệ Mới Dành Riêng Cho Windows</div>
+    <h1>Làm việc thông minh hơn với <span>JARVAS</span></h1>
+    <p>
+      Không chỉ là khung chat AI. JARVAS hiểu cửa sổ bạn đang mở, đọc đoạn chữ bạn vừa copy,
+      nhắc việc chủ động bằng giọng nói tiếng Việt và tích hợp sẵn bộ công cụ dân dụng siêu nhẹ ngay trên máy tính.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#roadmap">🚀 Xem lộ trình phát hành</a>
+      <a class="btn btn-outline" href="#features">🔍 Khám phá tính năng v1.0</a>
+    </div>
+  </header>
+
+  <section id="features" class="section container">
+    <div class="sec-head">
+      <h2>Sức mạnh cốt lõi ngay từ phiên bản 1.0</h2>
+      <p>Thiết kế gọn nhẹ, cài đặt 1-click, tập trung đúng vào những tác vụ bạn dùng mỗi ngày.</p>
+    </div>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">👁️</div>
+        <h3>Hiểu ý nửa lời (Ambient Context)</h3>
+        <p>Tự nhận biết ứng dụng đang mở và nội dung vừa Ctrl+C. Chỉ cần hỏi "dịch đoạn vừa copy" hay "tóm tắt trang này" là xong.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💬</div>
+        <h3>Giao diện Dark-Glass Hiện Đại</h3>
+        <p>Hiển thị sắc nét Markdown, bảng biểu, khối code có nút Copy 1-click, hỗ trợ kéo-thả ảnh trực tiếp và nhập liệu bằng giọng nói.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⏰</div>
+        <h3>Nhắc việc chủ động</h3>
+        <p>Đặt lịch bằng tiếng Việt tự nhiên ("15 phút nữa nhắc mình họp"). Tới giờ JARVAS tự bật thông báo nổi và đọc nhắc ra loa.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧬</div>
+        <h3>Trí nhớ dài hạn cục bộ</h3>
+        <p>Ghi nhớ thói quen, sở thích và thông tin quan trọng của riêng bạn. Tự động cập nhật khi có thông tin mới.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🧰</div>
+        <h3>12+ Công cụ dân dụng tích hợp</h3>
+        <p>Tra thời tiết & web live, tóm tắt video YouTube, đọc file PDF/Word, dịch tức thì, tạo mã QR, mở app/file nhanh và dọn rác tạm.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Gọi tức thì từ mọi màn hình</h3>
+        <p>Chạy gọn nhẹ ở khay hệ thống. Bấm <b>Ctrl + Alt + J</b> để gọi JARVAS ngay lập tức, <b>Ctrl + Alt + S</b> để ngắt giọng đọc.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="security" class="section container">
+    <div class="security-box">
+      <div>
+        <div class="hero-tag" style="margin-bottom:12px;">🔐 An Toàn & Quyền Riêng Tư</div>
+        <h2 style="font-size:28px;margin-bottom:12px;">Dữ liệu của bạn nằm 100% trên máy bạn</h2>
+        <p style="color:var(--muted);font-size:15px;">
+          JARVAS được xây dựng theo tiêu chuẩn an toàn phần mềm Windows: không thu thập dữ liệu người dùng,
+          không chạy lệnh hệ thống ẩn và hoàn toàn thân thiện với Windows Defender.
+        </p>
+      </div>
+      <ul class="sec-list">
+        <li><b>Mã hóa Windows DPAPI:</b> API Key được mã hóa khóa cứng theo đúng máy tính và tài khoản Windows của bạn.</li>
+        <li><b>Thiết lập 30 giây:</b> Trình hướng dẫn lần đầu (Onboarding) giúp kích hoạt nhanh mà không cần chạm vào file cấu hình.</li>
+        <li><b>Tùy biến phong cách:</b> Tự chọn tên gọi và giọng điệu giao tiếp (Thân thiện / Chuyên nghiệp / Bạn thân).</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="roadmap" class="section container">
+    <div class="sec-head">
+      <h2>Lộ trình phát triển JARVAS</h2>
+      <p>Cập nhật liên tục theo từng giai đoạn — luôn mượt mà, ổn định và ngày càng thông minh hơn.</p>
+    </div>
+    <div class="roadmap">
+      <div class="rm-item active">
+        <span class="rm-ver">v1.0 • Private Beta</span>
+        <h4>Nền tảng cốt lõi</h4>
+        <p>Giao diện Dark-Glass, Hiểu màn hình & Clipboard, Voice tiếng Việt, Nhắc việc chủ động, Trí nhớ dài hạn & 12+ công cụ dân dụng.</p>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver">v1.2 • Sắp ra mắt</span>
+        <h4>Kết nối di động</h4>
+        <p>Đồng bộ hội thoại và điều khiển PC từ xa an toàn qua Telegram.</p>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver">v1.5 • Sắp ra mắt</span>
+        <h4>Tương tác không chạm</h4>
+        <p>Điều khiển máy tính bằng cử chỉ tay (Air Gesture) & chế độ trò chuyện liên tục.</p>
+      </div>
+      <div class="rm-item">
+        <span class="rm-ver">v2.0 • Pro Edition</span>
+        <h4>Tự động hóa toàn diện</h4>
+        <p>Bảo mật khuôn mặt 3D, OS Agent tự thao tác giao diện Windows & các tính năng chuyên sâu.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <b>JARVAS</b> — Windows AI Assistant • Phiên bản thử nghiệm nội bộ (Private Beta).
+    </div>
+  </footer>
+</body>
+</html>
