@@ -1,6 +1,3 @@
-$readmePath = "D:\kali-linux-2026.2-vmware-amd64.vmwarevm\JARVAS_Web\README.md"
-
-@'
 <div align="center">
 
 # 🌌 J A R V A S
